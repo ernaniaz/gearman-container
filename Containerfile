@@ -21,5 +21,4 @@ RUN chmod 755 /usr/local/sbin/gearman-start.sh
 EXPOSE 4730/tcp
 
 # Running Gearman
-USER root
-CMD ["gearman-start.sh"]
+ENTRYPOINT ["gearman-start.sh"]
