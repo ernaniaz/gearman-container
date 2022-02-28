@@ -8,14 +8,18 @@ The image was created using pre-built RPM packages and a start script.
 The RPM files are available at RPMS/ and their source packages at SRPMS/.
 
 To build the Kubertnets image, just run:
+```
 podman build --layers --force-rm --tag gearmand-1:1.1.19.1 .
+```
 
 
 Running Gearman
 ---------------
 
 To run a container of this image, just run:
+```
 podman run -p 4730:4730 localhost/gearmand-1:1.1.19.1
+```
 
 You can use a long list of environment variables, as follow:
 
@@ -48,4 +52,6 @@ Example usage
 -------------
 
 You can start a Gearman container for debugging purposes using:
+```
 podman run -p 4730:4730 -e GEARMAN_VERBOSE=DEBUG localhost/gearmand-1:1.1.19.1
+```
