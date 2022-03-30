@@ -21,6 +21,11 @@ To run a container of this image, just run:
 podman run -p 4730:4730 quay.io/rhn_support_eazevedo/gearman:1.1.19.1
 ```
 
+You'll be able to see the execution messages. Add "-d" after "run" parameter to run it as daemon:
+```
+podman run -d -p 4730:4730 quay.io/rhn_support_eazevedo/gearman:1.1.19.1
+```
+
 You can use a long list of environment variables, as follow:
 
 * GEARMAN_LISTEN: Set address the server should listen on. Default is 0.0.0.0.
