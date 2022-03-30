@@ -1,7 +1,7 @@
 Gearman container image
 =======================
 
-Gearman 1.1.19.1 status:[![Docker Repository on Quay](https://quay.io/repository/ernaniaz/gearman-1.1.19.1/status "Docker Repository on Quay")](https://quay.io/repository/ernaniaz/gearman-1.1.19.1)
+Gearman 1.1.19.1 status:[![Docker Repository on Quay](https://quay.io/repository/rhn_support_eazevedo/gearman/status "Docker Repository on Quay")](https://quay.io/repository/rhn_support_eazevedo/gearman)
 
 This repository contains Dockerfiles for Gearman container image.
 The image was created using pre-built RPM packages and a start script.
