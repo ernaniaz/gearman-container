@@ -42,7 +42,7 @@ echo
 echo -n -e "Creating configuration file... "
 
 # Internal variables:
-CONFIG_FILE="/etc/gearman.conf"
+CONFIG_FILE="/tmp/gearman.conf"
 
 # External variables:
 CONFIG_LISTEN="${GEARMAN_LISTEN:-0.0.0.0}"
