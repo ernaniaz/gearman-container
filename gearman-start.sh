@@ -41,8 +41,12 @@ echo "GearmanD 1.1.19.1 - Container by Ernani Azevedo <azevedo@voipdomain.io>"
 echo
 echo -n -e "Creating configuration file... "
 
-# Internal variables:
-CONFIG_FILE="/tmp/gearman.conf"
+# Configuration file location (if root, at /etc/ otherwise at /tmp/, to complain with directory permission):
+if [ "$(/usr/bin/whoami)" == "gearmand" ]; then
+  CONFIG_FILE="/tmp/gearman.conf"
+else
+  CONFIG_FILE="/etc/gearman.conf"
+fi
 
 # External variables:
 CONFIG_LISTEN="${GEARMAN_LISTEN:-0.0.0.0}"
@@ -95,4 +99,4 @@ echo "OK!"
 echo "Starting gearman..."
 echo
 
-/usr/sbin/gearmand $(cat "${CONFIG_FILE}")
+exec /usr/sbin/gearmand $(cat "${CONFIG_FILE}") $@
