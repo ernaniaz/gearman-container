@@ -1,12 +1,12 @@
-# Gearman 1.1.19.1 Containerfile
+# Gearman 1.1.20 Containerfile
 # Maintained by Ernani Azevedo <azevedo@voipdomain.io>
-FROM ubi8/ubi:8.5
+FROM registry.access.redhat.com/ubi9:9.1.0
 
 # Add some useful environment variables
 ENV NAME=gearman \
-    GEARMAN_VERSION=1.1.19.1 \
+    GEARMAN_VERSION=1.1.20 \
     GEARMAN_SHORT_VERSION=1 \
-    VERSION=1.1.19.1
+    VERSION=1.1.20
 
 # Add a summary and a description
 ENV SUMMARY="Container for running Gearman ${GEARMAN_VERSION}" \
@@ -20,24 +20,29 @@ Please refer to https://github.com/ernaniaz/gearman-container for the build scri
 https://quay.io/repository/rhn_support_eazevedo/gearman for the image repository."
 
 # Add label and maintainer
-LABEL description="Gearman ${GEARMAN_VERSION} base on an UBI8 image"
+LABEL description="Gearman ${GEARMAN_VERSION} base on an UBI9 image"
 MAINTAINER Ernani Azevedo <azevedo@voipdomain.io>
 
 # Install packages and startup file
-ADD https://raw.githubusercontent.com/ernaniaz/gearman-container/main/RPMS/boost-program-options-1.66.0-10.el8.x86_64.rpm \
-    https://raw.githubusercontent.com/ernaniaz/gearman-container/main/RPMS/boost-system-1.66.0-10.el8.x86_64.rpm \
-    https://raw.githubusercontent.com/ernaniaz/gearman-container/main/RPMS/gearmand-${GEARMAN_VERSION}-18.el8.x86_64.rpm \
-    https://raw.githubusercontent.com/ernaniaz/gearman-container/main/RPMS/libgearman-${GEARMAN_VERSION}-18.el8.x86_64.rpm \
+ADD RPMS/boost-system-1.75.0-8.el9.x86_64.rpm \
+    RPMS/boost-program-options-1.75.0-8.el9.x86_64.rpm \
+    RPMS/gearmand-${GEARMAN_VERSION}-1.el9.x86_64.rpm \
+    RPMS/libgearman-${GEARMAN_VERSION}-1.el9.x86_64.rpm \
     /tmp/
-ADD https://raw.githubusercontent.com/ernaniaz/gearman-container/main/gearman-start.sh /usr/local/sbin/
+ADD gearman-start.sh /usr/local/sbin/
 
 # Install package and fix permissions
 RUN cd /tmp \
-    && dnf install -y boost-program-options-1.66.0-10.el8.x86_64.rpm boost-system-1.66.0-10.el8.x86_64.rpm gearmand-${GEARMAN_VERSION}-18.el8.x86_64.rpm libgearman-${GEARMAN_VERSION}-18.el8.x86_64.rpm \
-    && rm -f boost-program-options-1.66.0-10.el8.x86_64.rpm boost-system-1.66.0-10.el8.x86_64.rpm gearmand-${GEARMAN_VERSION}-18.el8.x86_64.rpm libgearman-${GEARMAN_VERSION}-18.el8.x86_64.rpm \
+    && dnf install -y boost-system-1.75.0-8.el9.x86_64.rpm boost-program-options-1.75.0-8.el9.x86_64.rpm gearmand-${GEARMAN_VERSION}-1.el9.x86_64.rpm libgearman-${GEARMAN_VERSION}-1.el9.x86_64.rpm \
+    && rm -f boost-system-1.75.0-8.el9.x86_64.rpm boost-program-options-1.75.0-8.el9.x86_64.rpm gearmand-${GEARMAN_VERSION}-1.el9.x86_64.rpm libgearman-${GEARMAN_VERSION}-1.el9.x86_64.rpm \
     && dnf clean all \
+    && rm -rf /var/cache/yum/* \
     && chmod 755 /usr/local/sbin/gearman-start.sh \
     && chown root:root /usr/local/sbin/gearman-start.sh
+
+# Health check
+HEALTHCHECK --interval=5m --timeout=3s --retries=2 \
+    CMD test $(supervisorctl status gearmand | awk '{print $2}' | grep 'RUNNING' | wc -l) -eq 1 || exit 1
 
 # Expose Gearman port
 EXPOSE 4730/tcp

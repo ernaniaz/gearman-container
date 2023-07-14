@@ -37,7 +37,7 @@ echo "                    ▓▓▓▓▒▒  ▓▓▒▒▒▒▒▒▒▒▒�
 echo "                    ▓▓▒▒    ▓▓▓▓▒▒  ▒▒▓▓▓▓░░    ▓▓▓▓"
 echo "                            ▓▓▒▒      ▒▒▓▓        ░░"
 echo
-echo "GearmanD 1.1.19.1 - Container by Ernani Azevedo <azevedo@voipdomain.io>"
+echo "GearmanD 1.1.20 - Container by Ernani Azevedo <azevedo@voipdomain.io>"
 echo
 echo -n -e "Creating configuration file... "
 

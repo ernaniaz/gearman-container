@@ -1,7 +1,7 @@
 Gearman container image
 =======================
 
-Gearman 1.1.19.1 status:[![Docker Repository on Quay](https://quay.io/repository/rhn_support_eazevedo/gearman/status "Docker Repository on Quay")](https://quay.io/repository/rhn_support_eazevedo/gearman)
+Gearman 1.1.20 status:[![Docker Repository on Quay](https://quay.io/repository/rhn_support_eazevedo/gearman/status "Docker Repository on Quay")](https://quay.io/repository/rhn_support_eazevedo/gearman)
 
 This repository contains Dockerfiles for Gearman container image.
 The image was created using pre-built RPM packages and a start script.
@@ -9,7 +9,7 @@ The RPM files are available at RPMS/ and their source packages at SRPMS/.
 
 To build the Kubertnets image, just run:
 ```
-podman build --force-rm --tag gearman:1.1.19.1 .
+podman build --force-rm --tag gearman:1.1.20 .
 ```
 
 
@@ -18,12 +18,12 @@ Running Gearman
 
 To run a container of this image, just run:
 ```
-podman run -p 4730:4730 quay.io/rhn_support_eazevedo/gearman:1.1.19.1
+podman run -p 4730:4730 quay.io/rhn_support_eazevedo/gearman:1.1.20
 ```
 
 You'll be able to see the execution messages. Add "-d" after "run" parameter to run it as daemon:
 ```
-podman run -d -p 4730:4730 quay.io/rhn_support_eazevedo/gearman:1.1.19.1
+podman run -d -p 4730:4730 quay.io/rhn_support_eazevedo/gearman:1.1.20
 ```
 
 You can use a long list of environment variables, as follow:
@@ -58,5 +58,5 @@ Example usage
 
 You can start a Gearman container for debugging purposes using:
 ```
-podman run -p 4730:4730 -e GEARMAN_VERBOSE=DEBUG quay.io/rhn_support_eazevedo/gearman:1.1.19.1
+podman run -p 4730:4730 -e GEARMAN_VERBOSE=DEBUG quay.io/rhn_support_eazevedo/gearman:1.1.20
 ```
