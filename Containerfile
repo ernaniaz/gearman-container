@@ -24,12 +24,12 @@ LABEL description="Gearman ${GEARMAN_VERSION} base on an UBI9 image"
 MAINTAINER Ernani Azevedo <azevedo@voipdomain.io>
 
 # Install packages and startup file
-ADD RPMS/boost-system-1.75.0-8.el9.x86_64.rpm \
-    RPMS/boost-program-options-1.75.0-8.el9.x86_64.rpm \
-    RPMS/gearmand-${GEARMAN_VERSION}-1.el9.x86_64.rpm \
-    RPMS/libgearman-${GEARMAN_VERSION}-1.el9.x86_64.rpm \
+ADD https://raw.githubusercontent.com/ernaniaz/gearman-container/main/RPMS/boost-system-1.75.0-8.el9.x86_64.rpm \
+    https://raw.githubusercontent.com/ernaniaz/gearman-container/main/RPMS/boost-program-options-1.75.0-8.el9.x86_64.rpm \
+    https://raw.githubusercontent.com/ernaniaz/gearman-container/main/RPMS/gearmand-${GEARMAN_VERSION}-1.el9.x86_64.rpm \
+    https://raw.githubusercontent.com/ernaniaz/gearman-container/main/RPMS/libgearman-${GEARMAN_VERSION}-1.el9.x86_64.rpm \
     /tmp/
-ADD gearman-start.sh /usr/local/sbin/
+ADD https://raw.githubusercontent.com/ernaniaz/gearman-container/main/gearman-start.sh /usr/local/sbin/
 
 # Install package and fix permissions
 RUN cd /tmp \
